@@ -10,7 +10,7 @@ app = Flask(__name__)
 @app.route("/<string:web>/<string:pages>/<string:file_name>")
 def hello(web, pages, file_name):
     full_path = "/" + web + "/" + pages + "/" + file_name
-    print(f"full path is: {full_path}")
+    str_ans = (f"full path is: {full_path} \n")
 
     """
     #check for ~ and .. in path
@@ -23,7 +23,8 @@ def hello(web, pages, file_name):
     else:
         abort(404)
     """
-    return "UOCIS docker demo!\n"
+    #return "UOCIS docker demo!\n"
+    return str_ans
 
 @app.errorhandler(403)
 def forbidden(e):
