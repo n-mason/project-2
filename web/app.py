@@ -17,7 +17,7 @@ def hello(web, pages, file_name):
         abort(403)
     # Else if file exists in pages/ directory, transmit STATUS_OK followed by file
     elif os.path.isfile(full_path):
-        send_from_directory('pages/', file_name), 200
+        return send_from_directory('pages/', file_name), 200
     #else case, so file is not found
     else:
         abort(404)
