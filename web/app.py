@@ -10,13 +10,14 @@ app = Flask(__name__)
 @app.route("/<string:web>/<string:pages>/<string:file_name>")
 def hello(web, pages, file_name):
     full_path = "./" + web + "/" + pages + "/" + file_name
+    path_to_check = pages + "/" + file_name
     #str_ans = (f"full path is: {full_path} \n")
 
     #check for ~ and .. in path
     if ("~" in full_path) or (".." in full_path):
         abort(403)
     # Else if file exists in pages/ directory, transmit STATUS_OK followed by file
-    elif os.path.isfile(full_path):
+    elif os.path.isfile(path_to_check):
         return send_from_directory('pages/', file_name), 200
     #else case, so file is not found
     else:
