@@ -19,7 +19,7 @@ def hello(request):
         abort(403)
     # else if file exists in pages/ directory, transmit STATUS_OK followed by file
     elif os.path.isfile(path_to_check):
-        file_found()
+        file_found(request)
     # else case, so file is not found
     else:
         abort(404)
@@ -32,7 +32,7 @@ def forbidden(e):
 def file_not_found(e):
     return send_from_directory('pages/', '404.html'), 404
 
-def file_found():
+def file_found(request):
     return send_from_directory('pages/', request), 200
 
 
