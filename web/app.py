@@ -32,7 +32,7 @@ def forbidden(e):
 def file_not_found(e):
     return send_from_directory('pages/', '404.html'), 404
 
-def file_found(f):
+def file_found():
     return send_from_directory('pages/', request), 200
 
 
