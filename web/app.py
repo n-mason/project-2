@@ -7,24 +7,21 @@ import os
 
 app = Flask(__name__)
 
-@app.route("/<string:web>/<string:pages>/<string:file_name>")
-def hello(web, pages, file_name):
-    full_path = "./" + web + "/" + pages + "/" + file_name
-    path_to_check = pages + "/" + file_name
-    #str_ans = (f"full path is: {full_path} \n")
+@app.route("/<string:request>")
+def hello(request):
+    # full input will look like localhost:5001/trivia.html, 
+    # so request will contain the stuff after the slash: "trivia.html"
+    path_to_check = "pages/" + request
 
-    #check for ~ and .. in path
-    if ("~" in full_path) or (".." in full_path):
+    # check for ~ and .. in path
+    if ("~" in request) or (".." in request):
         abort(403)
-    # Else if file exists in pages/ directory, transmit STATUS_OK followed by file
+    # else if file exists in pages/ directory, transmit STATUS_OK followed by file
     elif os.path.isfile(path_to_check):
         return send_from_directory('pages/', file_name), 200
-    #else case, so file is not found
+    # else case, so file is not found
     else:
         abort(404)
-    
-    #return "UOCIS docker demo!\n"
-    #return str_ans
 
 @app.errorhandler(403)
 def forbidden(e):
