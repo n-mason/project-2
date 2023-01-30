@@ -19,7 +19,7 @@ def hello(request):
         abort(403)
     # else if file exists in pages/ directory, transmit STATUS_OK followed by file
     elif os.path.isfile(path_to_check):
-        file_found(request)
+        return file_found(request)
     # else case, so file is not found
     else:
         abort(404)
