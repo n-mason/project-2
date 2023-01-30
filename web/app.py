@@ -19,7 +19,7 @@ def hello(request):
         abort(403)
     # else if file exists in pages/ directory, transmit STATUS_OK followed by file
     elif os.path.isfile(path_to_check):
-        return send_from_directory('pages/', request), 200
+        file_found()
     # else case, so file is not found
     else:
         abort(404)
@@ -30,8 +30,10 @@ def forbidden(e):
 
 @app.errorhandler(404)
 def file_not_found(e):
-    #return send_from_directory('pages/', '404.html'), 404
-    return f"This is port: {port} and this is debug: {debug}\n"
+    return send_from_directory('pages/', '404.html'), 404
+
+def file_found(f):
+    return send_from_directory('pages/', request), 200
 
 
 def parse_config(config_paths):
